@@ -11,17 +11,17 @@ const HomePage = () => {
     { id: "4", name: "Tokyo" },
     { id: "5", name: "Dubai" },
   ];
-  const [selectedCities, setSelectedCities] = useState<string[]>(["1","2"]);
+  const [value, setValue] = useState<string[]>();
 
   return (
     <div className="max-w-sm mx-auto p-2">
       <MultiSelect
         options={cities}
         placeholder="Select cities"
-        selectedItems={selectedCities}
-        onChange={setSelectedCities}
+        onChange={setValue}
+        value={value}
       />
-      {JSON.stringify(selectedCities)}
+      {JSON.stringify(value)}
     </div>
   );
 };

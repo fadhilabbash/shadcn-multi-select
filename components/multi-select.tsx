@@ -13,18 +13,18 @@ import { ChevronDown } from "lucide-react";
 interface MultiSelectProps {
   options: { id: string; name: string }[];
   placeholder?: string;
-  selectedItems: string[];
+  value? : string[];
   onChange: (selected: string[]) => void;
 }
 
 const MultiSelect = ({
   options,
   placeholder = "Select items",
-  selectedItems,
+  value=[],
   onChange,
 }: MultiSelectProps) => {
   const toggleSelection = (item: string, checked: boolean) => {
-    const updatedSelection = checked? [...selectedItems, item]: selectedItems.filter((i) => i !== item);
+    const updatedSelection = checked? [...value , item]: value .filter((i) => i !== item);
     onChange(updatedSelection);
   };
 
@@ -35,9 +35,9 @@ const MultiSelect = ({
           <div className="relative flex items-center">
             <Input
               value={
-                selectedItems.length > 0
+                value .length > 0
                 ? options
-                .filter((opt) => selectedItems.includes(opt.id))
+                .filter((opt) => value .includes(opt.id))
                 .map((opt) => opt.name)
                 .join(", ")
                   : placeholder
@@ -54,7 +54,7 @@ const MultiSelect = ({
           <DropdownMenuCheckboxItem
             onSelect={(e) => e.preventDefault()}
             key={item.id}
-            checked={selectedItems.includes(item.id)}
+            checked={value .includes(item.id)}
             onCheckedChange={(checked) => toggleSelection(item.id, checked)}
           >
             {item.name}
